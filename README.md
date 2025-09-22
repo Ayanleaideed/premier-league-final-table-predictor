@@ -1,56 +1,36 @@
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=20614650&assignment_repo_type=AssignmentRepo)
-# <Your project name>
-
-<Note - Replace all instructions within "<>" with your content>
-
 ## Project Overview 
 
 ### Business goal
-<This section is the first thing that someone coming to the repo will read, so make a compelling reason why they should be interested in this project. This will likley align with why you are interested in the project.  Somes questions to think about and answer include:  What is the overall goal of the analysis?  Why are you undertaking it?  What specific questions do you plan to answer with the analysis?>
+Soccer (football) is one of the most popular sports in the world, and the English Premier League (EPL) is especially interesting because it produces new data every week. I chose this topic because I enjoy following soccer and I think it would be fun to see how data can help explain team and player performance.  
+
+The goal of my project is to look at Premier League match data together with a larger historical dataset from Kaggle. By combining these two sources, I want to understand what factors are most important in winning matches and also see how current teams compare with teams in the past.  
+
+**Some questions I want to answer are:**
+- What stats (like shots, possession, goals conceded) are most strongly related to winning?  
+- Can simple models predict whether a team will win, lose, or draw a match?  
+- Are there any players this season who are performing better or worse than expected compared to averages?  
+- How do modern EPL teams compare to historical teams in European soccer?  
 
 ### Analysis approach
-<What analysis approach will be used to meet your goal / answer your quetions?  At a base level, it will fall into the lifecycle categories of Analytics, ML, and Reverse ETL.  This section should identify the category and provide more details.  For example, for an analytics project you could describe an example plot(s) that you think will be useful. For an ML project, you could identify the target variable and features.>
+My project will use both **analytics** and **machine learning**.  
+
+- First, I will do exploratory data analysis (EDA) with charts and summary statistics to see patterns in goals, shots, and other match stats.  
+- Next, I will create features that combine recent match data with historical averages, like team form over the last 5 matches or home vs away performance.  
+- Then I will train some simple classification models (for example logistic regression and random forest) to predict outcomes such as win/draw/loss.  
+- Finally, I will evaluate the models using metrics like accuracy and ROC-AUC to see how well they work.  
+
+This approach will let me tell a story about what matters most in soccer performance while also trying out some predictive modeling.
 
 ### Data sources
-<You need at least two data sources.  Ideally, all data sources can be accessed via an API or other automated means so that the ingestion can be fully automated.  At least one data source should be ‘dynamic’ where it is regularly refreshed with new data that needs to be ingested periodically.> 
 
-#### <Your data source 1>
-<Document your first data source.  Include an overview of the data source, the specific location (URL), expected access to the data, how it will be used for your analysis, etc.  Some technical content like number of columns and rows, data types, overall size of the data, refresh frequency, etc is appropriate also.>
+#### 1) Premier League Match Data API (Dynamic)
+- **Overview:** This API provides up-to-date EPL match information, including fixtures, scores, standings, and sometimes player stats.  
+- **Format/refresh:** JSON or CSV depending on how it’s pulled. It updates weekly as matches are played.  
+- **How I will use it:** This is my dynamic dataset. I will use it to track the current EPL season and generate features like team form and recent performance.  
+- **URL:** [Football-Data.org](https://www.football-data.org/)  
 
-#### <Your data source 2>
-<Document your second data source.  Follow the guidance for data source 1.>
-
-#### <Your additonal data source(s)>
-<Document your additional data source(s) as needed.  Follow the guidance for data source 1.>
-
-## Design - Data engineering lifecycle details
-This project aligns with the data engineering lifecycle.  The lifecycle is the foundation of the book, <u>Fundamentals of Data Engineering</u>, by Joe Ries and Matt Hously.  A screenshot of the lifecycle from the book is shown below.
-
-![Data Engineering Lifecycle](SupplementaryInfo/DataEngineeringLifecycle.png)
-
-This design section describes how this project implements the data engineering lifecycle.
-
-### Architecture and technology choices
-<The default expectation is that you will use a lakehouse architectural approach for this project.  In most cases, the medallion architecture pattern will further clarify the data states and how the data is processed.  If your approach aligns with these expectations, simply stating that here will provide enough context for most readers (along with the details below).  If you are considering a different approach, then more elaboration is required (along with discussion with your instructor) >
-
-### Data storage
-<What is your data storage organization?  What file format(s) are you using?  What are the important considerations for storage in your solution?>
-
-### Ingestion
-<Design documentation for ingestion goes here.  Where does the data come from?  How is it ingested?  Where is it stored (be specific)?>
-
-### Transformation
-<Design documentation for transformation goes here.  What steps are required to transform the data from its original form? Where is it stored (be specific)?  Note - a transformation to an efficient data storage format such as delta lake is expected.>
-
-### Serving
-<Design documentation for serving goes here.  What steps are required to transform the initial transformation into a format optimal for your analysis approach? Where is it stored (be specific)?  >
-
-## Undercurrents
-<The data engineering lifecylce identifies several undercurrents.  Identify and document the undercurrents (at least two) that are most relevant to your project.  Explain why these are the most relevant.  Keep in mind that the people accessing the repo may not know about undercurrents, so provide some context.>
-
-## Implementation
-
-### Navigating the repo
-
-### Reproduction steps
-<The spirit of this effort is that someone else could start with this repo and reproduce your analysis.  Outline the steps required to do so in this section.  This should include a description of the repo layout to ease navigation.>
+#### 2) European Soccer Database (Kaggle) — Static
+- **Overview:** This Kaggle dataset includes 25,000+ matches and 10,000+ players from 2007–2016 across European leagues. It has results, team stats, and player attributes.  
+- **Format/size:** SQLite/CSV (~300 MB).  
+- **How I will use it:** This is my static dataset. It gives me historical data that I can compare to the current EPL season to find longer-term trends.  
+- **URL:** [Kaggle Soccer Dataset](https://www.kaggle.com/datasets/hugomathien/soccer)  
