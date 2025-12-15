@@ -113,6 +113,10 @@ ENV/
 env.bak/
 venv.bak/
 
+# uv package manager
+uv.lock
+.python-version
+
 # Spyder project settings
 .spyderproject
 .spyproject
@@ -130,3 +134,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# IDE
+.vscode/
+.idea/
