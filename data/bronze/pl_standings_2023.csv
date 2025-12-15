@@ -1,0 +1,21 @@
+draw,goal_difference,goals_against,goals_for,ingestion_date,lost,played_games,points,position,season,team_id,team_name,team_short_name,team_tla,won
+7,62,34,96,2025-10-27 03:49:24,3,38,91,1,2023-24,65,Manchester City FC,Man City,MCI,28
+5,62,29,91,2025-10-27 03:49:24,5,38,89,2,2023-24,57,Arsenal FC,Arsenal,ARS,28
+10,45,41,86,2025-10-27 03:49:24,4,38,82,3,2023-24,64,Liverpool FC,Liverpool,LIV,24
+8,15,61,76,2025-10-27 03:49:24,10,38,68,4,2023-24,58,Aston Villa FC,Aston Villa,AVL,20
+6,13,61,74,2025-10-27 03:49:24,12,38,66,5,2023-24,73,Tottenham Hotspur FC,Tottenham,TOT,20
+9,14,63,77,2025-10-27 03:49:24,11,38,63,6,2023-24,61,Chelsea FC,Chelsea,CHE,18
+6,23,62,85,2025-10-27 03:49:24,14,38,60,7,2023-24,67,Newcastle United FC,Newcastle,NEW,18
+6,-1,58,57,2025-10-27 03:49:24,14,38,60,8,2023-24,66,Manchester United FC,Man United,MUN,18
+10,-14,74,60,2025-10-27 03:49:24,14,38,52,9,2023-24,563,West Ham United FC,West Ham,WHU,14
+10,-1,58,57,2025-10-27 03:49:24,15,38,49,10,2023-24,354,Crystal Palace FC,Crystal Palace,CRY,13
+12,-7,62,55,2025-10-27 03:49:24,14,38,48,11,2023-24,397,Brighton & Hove Albion FC,Brighton Hove,BHA,12
+9,-11,51,40,2025-10-27 03:49:24,16,38,48,12,2023-24,62,Everton FC,Everton,EVE,13
+9,-13,67,54,2025-10-27 03:49:24,16,38,48,13,2023-24,1044,AFC Bournemouth,Bournemouth,BOU,13
+8,-6,61,55,2025-10-27 03:49:24,17,38,47,14,2023-24,63,Fulham FC,Fulham,FUL,13
+7,-15,65,50,2025-10-27 03:49:24,18,38,46,15,2023-24,76,Wolverhampton Wanderers FC,Wolverhampton,WOL,13
+9,-9,65,56,2025-10-27 03:49:24,19,38,39,16,2023-24,402,Brentford FC,Brentford,BRE,10
+9,-18,67,49,2025-10-27 03:49:24,20,38,36,17,2023-24,351,Nottingham Forest FC,Nottingham,NOT,9
+8,-33,85,52,2025-10-27 03:49:24,24,38,26,18,2023-24,389,Luton Town FC,Luton Town,LUT,6
+9,-37,78,41,2025-10-27 03:49:24,24,38,24,19,2023-24,328,Burnley FC,Burnley,BUR,5
+7,-69,104,35,2025-10-27 03:49:24,28,38,16,20,2023-24,356,Sheffield United FC,Sheffield Utd,SHE,3

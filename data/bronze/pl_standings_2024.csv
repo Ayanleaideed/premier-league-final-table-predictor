@@ -1,0 +1,21 @@
+draw,goal_difference,goals_against,goals_for,ingestion_date,lost,played_games,points,position,season,team_id,team_name,team_short_name,team_tla,won
+9,45,41,86,2025-10-27 03:49:26,4,38,84,1,2024-25,64,Liverpool FC,Liverpool,LIV,25
+14,35,34,69,2025-10-27 03:49:26,4,38,74,2,2024-25,57,Arsenal FC,Arsenal,ARS,20
+8,28,44,72,2025-10-27 03:49:26,9,38,71,3,2024-25,65,Manchester City FC,Man City,MCI,21
+9,21,43,64,2025-10-27 03:49:26,9,38,69,4,2024-25,61,Chelsea FC,Chelsea,CHE,20
+6,21,47,68,2025-10-27 03:49:26,12,38,66,5,2024-25,67,Newcastle United FC,Newcastle,NEW,20
+9,7,51,58,2025-10-27 03:49:26,10,38,66,6,2024-25,58,Aston Villa FC,Aston Villa,AVL,19
+8,12,46,58,2025-10-27 03:49:26,11,38,65,7,2024-25,351,Nottingham Forest FC,Nottingham,NOT,19
+13,7,59,66,2025-10-27 03:49:26,9,38,61,8,2024-25,397,Brighton & Hove Albion FC,Brighton Hove,BHA,16
+11,12,46,58,2025-10-27 03:49:26,12,38,56,9,2024-25,1044,AFC Bournemouth,Bournemouth,BOU,15
+8,9,57,66,2025-10-27 03:49:26,14,38,56,10,2024-25,402,Brentford FC,Brentford,BRE,16
+9,0,54,54,2025-10-27 03:49:26,14,38,54,11,2024-25,63,Fulham FC,Fulham,FUL,15
+14,0,51,51,2025-10-27 03:49:26,11,38,53,12,2024-25,354,Crystal Palace FC,Crystal Palace,CRY,13
+15,-2,44,42,2025-10-27 03:49:26,12,38,48,13,2024-25,62,Everton FC,Everton,EVE,11
+10,-16,62,46,2025-10-27 03:49:26,17,38,43,14,2024-25,563,West Ham United FC,West Ham,WHU,11
+9,-10,54,44,2025-10-27 03:49:26,18,38,42,15,2024-25,66,Manchester United FC,Man United,MUN,11
+6,-15,69,54,2025-10-27 03:49:26,20,38,42,16,2024-25,76,Wolverhampton Wanderers FC,Wolverhampton,WOL,12
+5,-1,65,64,2025-10-27 03:49:26,22,38,38,17,2024-25,73,Tottenham Hotspur FC,Tottenham,TOT,11
+7,-47,80,33,2025-10-27 03:49:26,25,38,25,18,2024-25,338,Leicester City FC,Leicester City,LEI,6
+10,-46,82,36,2025-10-27 03:49:26,24,38,22,19,2024-25,349,Ipswich Town FC,Ipswich Town,IPS,4
+6,-60,86,26,2025-10-27 03:49:26,30,38,12,20,2024-25,340,Southampton FC,Southampton,SOU,2

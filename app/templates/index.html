@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Premier League Predictor</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <div class="shell">
+        <header class="hero">
+            <p class="eyebrow">Premier League Predictor</p>
+            <h1>Table, points, and storyline in one view</h1>
+            <p>
+                Drop in your latest season snapshot or upload a raw match log.
+                The FastAPI service loads the Random Forest stored at <code>src/Training/rf_model_2024_25.joblib</code>,
+                recreates the medallion gold features, and sends back projected points
+                plus positions.
+            </p>
+            <p class="notch">
+                Required fields per club: <code>team</code>, <code>wins</code>, <code>draws</code>,
+                <code>losses</code>, <code>goalsFor</code>, <code>goalsAgainst</code>, <code>homeWins</code>,
+                <code>awayWins</code>, and <code>isPromoted</code>. Matches played and points are filled in when
+                missing.
+            </p>
+        </header>
+
+        <section class="card">
+            <h2 class="section-title">Workflow</h2>
+            <ol>
+                <li>Edit the JSON payload so it reflects the table you want to score (20 rows for the full league).</li>
+                <li>Hit <strong>Predict Table</strong> or upload a CSV/XLS file if that’s easier.</li>
+                <li>Review the response table and keep iterating. Nothing is stored server-side.</li>
+            </ol>
+        </section>
+
+        <section class="grid two-column">
+            <div class="card">
+                <h2 class="section-title">JSON playground</h2>
+                <div class="form-stack">
+                    <textarea id="payloadField">{{ sample_payload }}</textarea>
+                    <button id="predictBtn">Predict Table</button>
+                    <div id="jsonError" class="error"></div>
+                </div>
+            </div>
+            <div class="card">
+                <h2 class="section-title">Upload standings or match logs</h2>
+                <p>
+                    Column names are case-insensitive. The app recognizes <code>team</code>, <code>wins</code>,
+                    <code>draws</code>, <code>losses</code>, <code>GF</code>, <code>GA</code>, <code>homeWins</code>,
+                    <code>awayWins</code>, and <code>isPromoted</code>. Uploading match-level files with
+                    <code>HomeTeam</code>/<code>AwayTeam</code>/<code>FTHG</code>/<code>FTAG</code> is also supported.
+                </p>
+                <form id="fileForm" class="form-stack" enctype="multipart/form-data">
+                    <input type="file" name="file" id="fileInput" accept=".csv,.xls,.xlsx" required>
+                    <label>
+                        Season
+                        <input type="text" name="season" id="seasonField" value="2024-25">
+                    </label>
+                    <button type="submit" id="fileBtn">Upload &amp; Predict</button>
+                    <div id="fileError" class="error"></div>
+                </form>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2 class="section-title">Prediction output</h2>
+            <div class="table-wrapper">
+                <table id="resultTable">
+                    <thead>
+                        <tr>
+                            <th>Predicted Position</th>
+                            <th>Team</th>
+                            <th>Season</th>
+                            <th>Previous Points</th>
+                            <th>Predicted Points</th>
+                            <th>Promoted</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2 class="section-title">Feature columns under the hood</h2>
+            <p class="notch">
+                The app mirrors the gold dataset generated in Databricks, so FastAPI always feeds the model the same
+                feature set.
+            </p>
+            <div class="feature-list">
+                {% for column in feature_columns %}
+                <span class="feature-pill">{{ column }}</span>
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const button = document.getElementById('predictBtn');
+        const payloadField = document.getElementById('payloadField');
+        const tableBody = document.querySelector('#resultTable tbody');
+        const jsonError = document.getElementById('jsonError');
+        const fileForm = document.getElementById('fileForm');
+        const fileError = document.getElementById('fileError');
+        const fileButton = document.getElementById('fileBtn');
+
+        const renderPredictions = (rows) => {
+            tableBody.innerHTML = '';
+            rows.forEach(row => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${row.predicted_position}</td>
+                    <td>${row.team}</td>
+                    <td>${row.season}</td>
+                    <td>${row.prev_points}</td>
+                    <td>${row.predicted_points}</td>
+                    <td>${row.is_promoted ? 'Yes' : 'No'}</td>
+                `;
+                tableBody.appendChild(tr);
+            });
+        };
+
+        button.addEventListener('click', async () => {
+            jsonError.textContent = '';
+            let payload;
+            try {
+                payload = JSON.parse(payloadField.value);
+            } catch (err) {
+                jsonError.textContent = 'Invalid JSON: ' + err;
+                return;
+            }
+            button.disabled = true;
+            try {
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const data = await response.json();
+                if (!response.ok) {
+                    throw new Error(data.detail || 'Prediction failed');
+                }
+                renderPredictions(data.predictions);
+            } catch (err) {
+                jsonError.textContent = err;
+            } finally {
+                button.disabled = false;
+            }
+        });
+
+        fileForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            fileError.textContent = '';
+            fileButton.disabled = true;
+            const formData = new FormData(fileForm);
+            try {
+                const response = await fetch('/predict/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await response.json();
+                if (!response.ok) {
+                    throw new Error(data.detail || 'Prediction failed');
+                }
+                renderPredictions(data.predictions);
+            } catch (err) {
+                fileError.textContent = err;
+            } finally {
+                fileButton.disabled = false;
+            }
+        });
+    </script>
+</body>
+
+</html>
